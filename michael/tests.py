@@ -27,3 +27,5 @@ class HomePageTest(TestCase):
         html = response.content.decode('utf8')
         self.assertIn("<h1>Michael Hunter</h1>", html)
 
+
+
