@@ -1,10 +1,31 @@
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 import time
+import sys
 import unittest
 
 class PWFunctionalTest(StaticLiveServerTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        for arg in sys.argv:
+            if 'liveserver' in arg:
+                cls.server_url = 'http://' + arg.split('=')[1]
+                return
+        super().setUpClass()
+        cls.server_url=cls.live_server_url
+
+    def wait_for(self, fn):
+        start_time = time.time()
+        while True:
+            try:
+                return fn()
+            except (AssertionError, WebDriverException) as e:
+                if time.time() - start_time > MAX_WAIT:
+                    raise e
+                time.sleep(0.5)
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -17,3 +38,4 @@ class PWFunctionalTest(StaticLiveServerTestCase):
         self.assertIn('Michael Hunter', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Michael Hunter', header_text)
+
