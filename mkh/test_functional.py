@@ -6,6 +6,8 @@ import time
 import sys
 import unittest
 
+MAX_WAIT = 10
+
 class PWFunctionalTest(StaticLiveServerTestCase):
 
     @classmethod
@@ -38,4 +40,7 @@ class PWFunctionalTest(StaticLiveServerTestCase):
         self.assertIn('Michael Hunter', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Michael Hunter', header_text)
+        self.wait_for(lambda: self.browser.find_elements_by_css_selector('#id_text:university'))
+        self.wait_for(lambda: self.browser.find_elements_by_css_selector('#id_text:workplace'))
+
 
