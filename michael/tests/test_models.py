@@ -10,6 +10,15 @@ class JobModelTest(TestCase):
         self.assertEqual(job.jobTitle,'')
         self.assertEqual(job.startYear,'')
 
+    def test_actual_text(self):
+        job = Job(employer='Lockheed Martin', endYear='2014',
+                  jobTitle='Staff Software Engineer', startYear='2002'
+                  )
+        self.assertEqual(job.employer,'Lockheed Martin')
+        self.assertEqual(job.endYear,'2014')
+        self.assertEqual(job.jobTitle,'Staff Software Engineer')
+        self.assertEqual(job.startYear,'2002')
+
 class EducationModelTest(TestCase):
     def test_default_text(self):
         edu = Education()
