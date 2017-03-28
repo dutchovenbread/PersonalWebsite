@@ -12,8 +12,16 @@ class JobModelTest(TestCase):
 
 class EducationModelTest(TestCase):
     def test_default_text(self):
-        pass
+        edu = Education()
+        self.assertEqual(edu.degree, '')
+        self.assertEqual(edu.major,'')
+        self.assertEqual(edu.school,'')
+        self.assertEqual(edu.yearCompleted,'')
 
 class PersonModelTest(TestCase):
     def test_default_text(self):
-        pass
+        person = Person()
+        self.assertEqual(person.firstName,'')
+        self.assertEqual(person.lastName,'')
+        self.assertEqual(person.middleInitial,'')
+
