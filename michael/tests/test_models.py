@@ -11,8 +11,10 @@ class JobModelTest(TestCase):
         self.assertEqual(job.startYear,'')
 
     def test_actual_text(self):
+        person = Person()
         job = Job(employer='Lockheed Martin', endYear='2014',
-                  jobTitle='Staff Software Engineer', startYear='2002'
+                  jobTitle='Staff Software Engineer', startYear='2002',
+                  person=person.id
                   )
         self.assertEqual(job.employer,'Lockheed Martin')
         self.assertEqual(job.endYear,'2014')
@@ -28,9 +30,10 @@ class EducationModelTest(TestCase):
         self.assertEqual(edu.yearCompleted,'')
 
     def test_actual_text(self):
+        person = Person()
         edu = Education(degree='Master of Science', major='Systems Engineering',
                         school='Missouri University of Science and Technology',
-                        yearCompleted='2016')
+                        yearCompleted='2016', person=person.id)
         self.assertEqual(edu.degree,'Master of Science')
         self.assertEqual(edu.major,'Systems Engineering')
         self.assertEqual(edu.school,'Missouri University of Science and Technology')
